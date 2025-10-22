@@ -52,18 +52,21 @@ def main():
 
     for i in range(10):
         try:
-            res = client.models.generate_content(model="gemini-2.0-flash-001",
-                                                 contents=messages,
-                                                 config=types.GenerateContentConfig(
-                                                     system_instruction=SYSTEM_PROMPT,
-                                                     tools=[AVAILABLE_TOOLS]))
+            res = client.models.generate_content(
+                model="gemini-2.0-flash-001",
+                contents=messages,
+                config=types.GenerateContentConfig(
+                    system_instruction=SYSTEM_PROMPT, tools=[AVAILABLE_TOOLS]))
             if res.candidates:
                 for candidate in res.candidates:
                     messages.append(candidate.content)
 
             if args.verbose:
-                print(f"Prompt tokens: {res.usage_metadata.prompt_token_count}")
-                print(f"Response tokens: {res.usage_metadata.candidates_token_count}")
+                print(
+                    f"Prompt tokens: {res.usage_metadata.prompt_token_count}")
+                print(
+                    f"Response tokens: {res.usage_metadata.candidates_token_count}"
+                )
 
             if not res.function_calls:
                 print(f"Gemini: {res.text}")
@@ -78,7 +81,8 @@ def main():
                     print(f"-> {fn_res}")
                 function_responses.append(fn_res.parts[0])
 
-            messages.append(types.Content(role="user", parts=function_responses))
+            messages.append(
+                types.Content(role="user", parts=function_responses))
 
         except Exception as e:
             print("Something went horribly wrong!", e)
@@ -93,32 +97,22 @@ def call_function(fn_part, verbose=False):
 
     if fn_part.name not in AVAILABLE_FUNCTIONS:
         return types.Content(
-                role="tool",
-                parts=[
-                    types.Part.from_function_response(
-                        name=fn_part.name,
-                        response={
-                            "error": f"Unknown function: {fn_part.name}"
-                            }
-                        )
-                    ]
-                )
+            role="tool",
+            parts=[
+                types.Part.from_function_response(
+                    name=fn_part.name,
+                    response={"error": f"Unknown function: {fn_part.name}"})
+            ])
 
     args = dict(fn_part.args)
     args["working_directory"] = "./calculator"
     res = AVAILABLE_FUNCTIONS[fn_part.name](**args)
 
-    return types.Content(
-            role="tool",
-            parts=[
-                types.Part.from_function_response(
-                    name=fn_part.name,
-                    response={
-                        "result": res
-                        }
-                    )
-                ]
-            )
+    return types.Content(role="tool",
+                         parts=[
+                             types.Part.from_function_response(
+                                 name=fn_part.name, response={"result": res})
+                         ])
 
 
 if __name__ == "__main__":

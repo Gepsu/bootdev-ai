@@ -47,18 +47,18 @@ schema_run_python_file = types.FunctionDeclaration(
     parameters=types.Schema(
         type=types.Type.OBJECT,
         properties={
-            "file_path": types.Schema(
+            "file_path":
+            types.Schema(
                 type=types.Type.STRING,
                 description="The file that is executed on command." +
-                            "The file must be a python file ending" +
-                            "with '.py'.",
-                ),
-            "args": types.Schema(
+                "The file must be a python file ending" + "with '.py'.",
+            ),
+            "args":
+            types.Schema(
                 type=types.Type.OBJECT,
                 description="Additional arguments that can be passed" +
-                            "to the called python file in a list form." +
-                            "These arguments are optional."
-                ),
-            },
-        ),
-    )
+                "to the called python file in a list form." +
+                "These arguments are optional."),
+        },
+    ),
+)

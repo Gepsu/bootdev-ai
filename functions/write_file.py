@@ -31,14 +31,16 @@ schema_write_file = types.FunctionDeclaration(
     parameters=types.Schema(
         type=types.Type.OBJECT,
         properties={
-            "file_path": types.Schema(
+            "file_path":
+            types.Schema(
                 type=types.Type.STRING,
                 description="The file to write and overwrite to.",
-                ),
-            "content": types.Schema(
+            ),
+            "content":
+            types.Schema(
                 type=types.Type.STRING,
                 description="The content to be written to the file.",
-                ),
-            },
-        ),
-    )
+            ),
+        },
+    ),
+)

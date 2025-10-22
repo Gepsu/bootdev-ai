@@ -30,17 +30,17 @@ def get_file_content(working_directory, file_path):
 schema_get_files_content = types.FunctionDeclaration(
     name="get_file_content",
     description="Returns the contents of a file in a specified file." +
-                f"Files over {MAX_CHARS} are truncated.",
+    f"Files over {MAX_CHARS} are truncated.",
     parameters=types.Schema(
         type=types.Type.OBJECT,
         properties={
-            "file_path": types.Schema(
+            "file_path":
+            types.Schema(
                 type=types.Type.STRING,
                 description="The file to list the contents of relative " +
-                            "to the working directory. If one is not " +
-                            "provided or it doesn't exist, it " +
-                            "returns an error.",
-                ),
-            },
-        ),
-    )
+                "to the working directory. If one is not " +
+                "provided or it doesn't exist, it " + "returns an error.",
+            ),
+        },
+    ),
+)

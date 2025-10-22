@@ -1,6 +1,8 @@
 # Copied from boot.dev
 
+
 class Calculator:
+
     def __init__(self):
         self.operators = {
             "+": lambda a, b: a + b,
@@ -27,11 +29,9 @@ class Calculator:
 
         for token in tokens:
             if token in self.operators:
-                while (
-                    operators
-                    and operators[-1] in self.operators
-                    and self.precedence[operators[-1]] >= self.precedence[token]
-                ):
+                while (operators and operators[-1] in self.operators
+                       and self.precedence[operators[-1]]
+                       >= self.precedence[token]):
                     self._apply_operator(operators, values)
                 operators.append(token)
             else:

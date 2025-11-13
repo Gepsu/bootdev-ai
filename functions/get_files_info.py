@@ -9,11 +9,13 @@ def get_files_info(working_directory, directory="."):
         path = os.path.abspath(path)
 
         if not path.startswith(working_directory):
-            return f"Error: Cannot list \"{directory}\" as it " + \
-                    "is outside the permitted working directory"
+            return (
+                f'Error: Cannot list "{directory}" as it '
+                + "is outside the permitted working directory"
+            )
 
         if not os.path.isdir(path):
-            return f"Error: \"{directory}\" is not a directory"
+            return f'Error: "{directory}" is not a directory'
 
         res = [f"Result for '{directory}' directory:"]
         for file in os.listdir(path):
@@ -28,17 +30,16 @@ def get_files_info(working_directory, directory="."):
 
 schema_get_files_info = types.FunctionDeclaration(
     name="get_files_info",
-    description="Lists files in the specified directory along with their " +
-    "sizes, constrained to the working directory.",
+    description="Lists files in the specified directory along with their "
+    + "sizes, constrained to the working directory.",
     parameters=types.Schema(
         type=types.Type.OBJECT,
         properties={
-            "directory":
-            types.Schema(
+            "directory": types.Schema(
                 type=types.Type.STRING,
-                description="The directory to list files from, relative to " +
-                "the working directory. If not provided, lists " +
-                "files in the working directory itself.",
+                description="The directory to list files from, relative to "
+                + "the working directory. If not provided, lists "
+                + "files in the working directory itself.",
             ),
         },
     ),

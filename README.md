@@ -15,3 +15,9 @@ You can perform the following operations:
 All paths you provide should be relative to the working directory. You do not
 need to specify the working directory in your function calls as it is
 automatically injected for security reasons.
+
+**Lessons learned**
+
+- Learned how to extend generative AI's functionality with custom tools and capabilities
+- Understood the importance of implementing strict safeguards when granting AI access to said tools and capabilities
+- UV package manager is pretty awesome!
